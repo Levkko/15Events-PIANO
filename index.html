@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano</title>
+    <script src="script.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .piano {
+            display: flex;
+            position: relative;
+            background-color: #333;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .white-key {
+            width: 40px;
+            height: 200px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 0 0 5px 5px;
+            z-index: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 10px;
+            box-sizing: border-box;
+            font-size: 12px;
+            color: #333;
+        }
+        
+        .white-key:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .black-key {
+            width: 24px;
+            height: 120px;
+            background-color: #333;
+            position: absolute;
+            z-index: 2;
+            border-radius: 0 0 3px 3px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 8px;
+            box-sizing: border-box;
+            font-size: 10px;
+            color: white;
+        }
+        
+        .black-key:hover {
+            background-color: #555;
+        }
+        
+        .key-label {
+            margin-top: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .note-name {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="piano" id="piano">
+        <!-- Клавіші C4 октави -->
+        <div class="white-key" data-note="C4" data-key="Z">
+            <span class="note-name">C4</span>
+            <span class="key-label">Z</span>
+        </div>
+        <div class="black-key" style="left: 28px;" data-note="C#4" data-key="S">
+            <span class="note-name">C#4</span>
+            <span class="key-label">S</span>
+        </div>
+        <div class="white-key" data-note="D4" data-key="X">
+            <span class="note-name">D4</span>
+            <span class="key-label">X</span>
+        </div>
+        <div class="black-key" style="left: 68px;" data-note="D#4" data-key="D">
+            <span class="note-name">D#4</span>
+            <span class="key-label">D</span>
+        </div>
+        <div class="white-key" data-note="E4" data-key="C">
+            <span class="note-name">E4</span>
+            <span class="key-label">C</span>
+        </div>
+        <div class="white-key" data-note="F4" data-key="V">
+            <span class="note-name">F4</span>
+            <span class="key-label">V</span>
+        </div>
+        <div class="black-key" style="left: 148px;" data-note="F#4" data-key="G">
+            <span class="note-name">F#4</span>
+            <span class="key-label">G</span>
+        </div>
+        <div class="white-key" data-note="G4" data-key="B">
+            <span class="note-name">G4</span>
+            <span class="key-label">B</span>
+        </div>
+        <div class="black-key" style="left: 188px;" data-note="G#4" data-key="H">
+            <span class="note-name">G#4</span>
+            <span class="key-label">H</span>
+        </div>
+        <div class="white-key" data-note="A4" data-key="N">
+            <span class="note-name">A4</span>
+            <span class="key-label">N</span>
+        </div>
+        <div class="black-key" style="left: 228px;" data-note="A#4" data-key="J">
+            <span class="note-name">A#4</span>
+            <span class="key-label">J</span>
+        </div>
+        <div class="white-key" data-note="B4" data-key="M">
+            <span class="note-name">B4</span>
+            <span class="key-label">M</span>
+        </div>
+        
+        <!-- Клавіші C5 октави -->
+        <div class="white-key" data-note="C5" data-key="Q">
+            <span class="note-name">C5</span>
+            <span class="key-label">Q</span>
+        </div>
+        <div class="black-key" style="left: 308px;" data-note="C#5" data-key="2">
+            <span class="note-name">C#5</span>
+            <span class="key-label">2</span>
+        </div>
+        <div class="white-key" data-note="D5" data-key="W">
+            <span class="note-name">D5</span>
+            <span class="key-label">W</span>
+        </div>
+        <div class="black-key" style="left: 348px;" data-note="D#5" data-key="3">
+            <span class="note-name">D#5</span>
+            <span class="key-label">3</span>
+        </div>
+        <div class="white-key" data-note="E5" data-key="E">
+            <span class="note-name">E5</span>
+            <span class="key-label">E</span>
+        </div>
+        <div class="white-key" data-note="F5" data-key="R">
+            <span class="note-name">F5</span>
+            <span class="key-label">R</span>
+        </div>
+        <div class="black-key" style="left: 428px;" data-note="F#5" data-key="5">
+            <span class="note-name">F#5</span>
+            <span class="key-label">5</span>
+        </div>
+        <div class="white-key" data-note="G5" data-key="T">
+            <span class="note-name">G5</span>
+            <span class="key-label">T</span>
+        </div>
+        <div class="black-key" style="left: 468px;" data-note="G#5" data-key="6">
+            <span class="note-name">G#5</span>
+            <span class="key-label">6</span>
+        </div>
+        <div class="white-key" data-note="A5" data-key="Y">
+            <span class="note-name">A5</span>
+            <span class="key-label">Y</span>
+        </div>
+        <div class="black-key" style="left: 508px;" data-note="A#5" data-key="7">
+            <span class="note-name">A#5</span>
+            <span class="key-label">7</span>
+        </div>
+        <div class="white-key" data-note="B5" data-key="U">
+            <span class="note-name">B5</span>
+            <span class="key-label">U</span>
+        </div>
+        
+        <!-- Клавіші C6 октави до G6 -->
+        <div class="white-key" data-note="C6" data-key="I">
+            <span class="note-name">C6</span>
+            <span class="key-label">I</span>
+        </div>
+        <div class="black-key" style="left: 588px;" data-note="C#6" data-key="9">
+            <span class="note-name">C#6</span>
+            <span class="key-label">9</span>
+        </div>
+        <div class="white-key" data-note="D6" data-key="O">
+            <span class="note-name">D6</span>
+            <span class="key-label">O</span>
+        </div>
+        <div class="black-key" style="left: 628px;" data-note="D#6" data-key="0">
+            <span class="note-name">D#6</span>
+            <span class="key-label">0</span>
+        </div>
+        <div class="white-key" data-note="E6" data-key="P">
+            <span class="note-name">E6</span>
+            <span class="key-label">P</span>
+        </div>
+        <div class="white-key" data-note="F6" data-key="[">
+            <span class="note-name">F6</span>
+            <span class="key-label">[</span>
+        </div>
+        <div class="black-key" style="left: 708px;" data-note="F#6" data-key="=">
+            <span class="note-name">F#6</span>
+            <span class="key-label">=</span>
+        </div>
+        <div class="white-key" data-note="G6" data-key="]">
+            <span class="note-name">G6</span>
+            <span class="key-label">]</span>
+        </div>
+    </div>
+</body>
+</html>
