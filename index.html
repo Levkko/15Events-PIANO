@@ -6,15 +6,36 @@
     <title>Piano</title>
     <script src="./scripts/mouse.js" defer></script>
     <script src="./scripts/keyboard.js" defer></script>
+    <script src="./scripts/hideletters.js" defer></script>
     <style>
       body {
         font-family: Arial, sans-serif;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         min-height: 100vh;
         margin: 0;
         background-color: #f5f5f5;
+      }
+
+      .controls {
+        margin-bottom: 35px;
+      }
+
+      .hide-button {
+        padding: 10px 15px;
+        background-color: #8f8f8f;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.2s;
+      }
+
+      .hide-button:hover {
+        background-color: #6e6e6e;
       }
 
       .piano {
@@ -96,9 +117,16 @@
       .key {
         user-select: none;
       }
+
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
   <body>
+    <div class="controls">
+      <button id="toggleSymbols" class="hide-button">Сховати символи</button>
+    </div>
     <div class="piano" id="piano">
       <!-- Клавіші C4 октави -->
       <div class="key white-key" data-note="C4" data-key="Z">
