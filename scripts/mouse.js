@@ -27,7 +27,7 @@ keys.forEach((key) => {
       // noteSound.pause();
       key.classList.remove('active');
 
-      console.log("mouse untouch");
+      console.log("mouse up");
     }
   });
 
