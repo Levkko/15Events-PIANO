@@ -6,11 +6,11 @@ document.addEventListener("keydown", (event) => {
 
   keys.forEach((key) => {
     let noteSound;
-    const keyAttribute = (
-      key.getAttribute("data-key") || key.getAttribute("alternative-data-key")
-    ).toLowerCase();
-
-    if (pressedKey === keyAttribute) {
+    const dataKeyLower = (key.getAttribute("data-key") || "").toLowerCase();
+    const altKeyLower = (key.getAttribute("alternative-data-key") || "").toLowerCase();
+    
+    if (pressedKey === dataKeyLower || pressedKey === altKeyLower)
+        {
       const note = key.getAttribute("data-note");
 
 
