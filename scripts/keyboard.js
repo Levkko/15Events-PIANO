@@ -30,7 +30,7 @@ document.addEventListener("keydown", (event) => {
 
     document.addEventListener("keyup", () => {
       if (noteSound) {
-        noteSound.pause();
+        // noteSound.pause();
         key.classList.remove('active');
         console.log("keyboard up");
       }
