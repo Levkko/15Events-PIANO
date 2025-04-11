@@ -1,17 +1,11 @@
 //Мишка
 var keys = document.querySelectorAll(".key");
-let currentNoteSound;
 
 keys.forEach((key) => {
   let noteSound;
 
   key.addEventListener("mousedown", () => {
     var note = key.getAttribute("data-note");
-
-    if (currentNoteSound) {
-      currentNoteSound.pause();
-      currentNoteSound.currentTime = 0;
-    }
 
     var instrumentSelector = document.getElementById("instrument");
     var selectedInstrument = instrumentSelector.value;
@@ -26,15 +20,13 @@ keys.forEach((key) => {
 
     noteSound = new Audio(noteSoundChosen);
     if (selectedInstrument === "piano") {
-      noteSound.volume = volumeSlider.value / 100; //цю властивість в ChatGPT дізнався
+      noteSound.volume = volumeSlider.value / 100;
     }
     if (selectedInstrument === "celesta") {
       noteSound.volume = volumeSlider.value / 100;
     }
 
     noteSound.play();
-
-    currentNoteSound = noteSound;
 
     key.classList.add("active");
     console.log("mouse touch");
@@ -44,7 +36,7 @@ keys.forEach((key) => {
     if (noteSound) {
       // noteSound.pause();
       key.classList.remove("active");
-
+      fadeOutAudio(noteSound);
       console.log("mouse up");
     }
   });
@@ -53,7 +45,7 @@ keys.forEach((key) => {
     if (noteSound) {
       // noteSound.pause();
       key.classList.remove("active");
-
+      fadeOutAudio(noteSound);
       console.log("mouse leave");
     }
   });

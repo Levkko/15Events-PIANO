@@ -1,10 +1,10 @@
-//Клавіатура
-var keys = document.querySelectorAll(".key");
-let noteSound;
-var activeKey;
+//клава (кока)
+let activeKeys = {};
 
 document.addEventListener("keydown", (event) => {
   const pressedKey = event.code;
+
+  if (activeKeys[pressedKey]) return false; //блокування тих самих нот
 
   keys.forEach((key) => {
     const dataCode = key.getAttribute("data-code");
@@ -12,11 +12,6 @@ document.addEventListener("keydown", (event) => {
 
     if (pressedKey === dataCode || pressedKey === altdataCode) {
       const note = key.getAttribute("data-note");
-
-      if (currentNoteSound) {
-        currentNoteSound.pause();
-        currentNoteSound.currentTime = 0;
-      }
 
       var instrumentSelector = document.getElementById("instrument");
       var selectedInstrument = instrumentSelector.value;
@@ -29,29 +24,34 @@ document.addEventListener("keydown", (event) => {
         noteSoundChosen = `./notes celesta/${note}.wav`;
       }
 
-      noteSound = new Audio(noteSoundChosen);
-      if (selectedInstrument === "piano") {
-        noteSound.volume = volumeSlider.value / 100; //цю властивість (.volume) в ChatGPT дізнався
-      }
-      if (selectedInstrument === "celesta") {
-        noteSound.volume = volumeSlider.value / 100;
-      }
-
+      const noteSound = new Audio(noteSoundChosen);
+      noteSound.volume = volumeSlider.value / 100;
       noteSound.play();
 
-      currentNoteSound = noteSound;
+      activeKeys[pressedKey] = [noteSound];
 
       key.classList.add("active");
-      activeKey = key;
       console.log("keyboard touch");
     }
   });
 });
-document.addEventListener("keyup", () => {
-  if (activeKey) {
-    // noteSound.pause();
-    activeKey.classList.remove("active");
+
+document.addEventListener("keyup", (event) => {
+  let keyCode = event.code;
+
+  if (activeKeys[keyCode]) {
+    let sounds = activeKeys[keyCode];
+
+    for (let i = 0; i < sounds.length; i++) {
+      let sound = sounds[i];
+      fadeOutAudio(sound);
+    }
+
+    delete activeKeys[keyCode];
+
+    let keyElement = document.querySelector('[data-code="' + keyCode + '"], [alternative-data-code="' + keyCode + '"]');
+    
+    keyElement.classList.remove("active");
     console.log("keyboard up");
   }
 });
-//-----------------
