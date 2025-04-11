@@ -38,8 +38,7 @@ document.addEventListener("keydown", (event) => {
 document.addEventListener("keyup", function(event) {
 
   if (activeKeys[event.code]) {
-    let sound = activeKeys[event.code];
-    fadeOutAudio(sound);
+    fadeOutAudio(activeKeys[event.code]);
 
     delete activeKeys[event.code];
 
