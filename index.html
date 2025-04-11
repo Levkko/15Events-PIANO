@@ -4,23 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Piano</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <script src="./scripts/fade-out.js" defer></script>
     <script src="./scripts/mouse.js" defer></script>
     <script src="./scripts/keyboard.js" defer></script>
     <script src="./scripts/hideletters.js" defer></script>
     <script src="./scripts/volume.js" defer></script>
+    <script src="./scripts/theme.js" defer></script>
   </head>
   <body>
+    <div class="theme-toggle-container">
+      <button id="themeToggle" class="theme-toggle">Тема</button>
+    </div>
+
     <div class="controls">
       <button id="toggleSymbols" class="hide-button">Сховати символи</button>
-    
+
       <div class="volume-control">
         <label for="volume">Гучність:</label>
-        <input type="range" id="volume" class="volume-slider" min="0" max="100" value="90">
+        <input
+          type="range"
+          id="volume"
+          class="volume-slider"
+          min="0"
+          max="100"
+          value="90"
+        />
         <span id="volumeValue" class="volume-value">90%</span>
       </div>
-      
+
       <div class="sound-selector">
         <select id="instrument" name="instrument">
           <option value="piano">Grand Piano</option>
@@ -105,7 +117,12 @@
       </div>
 
       <!-- Клавіші C5 октави -->
-      <div class="key white-key" data-note="C5" data-code="KeyQ" alternative-data-code="Comma">
+      <div
+        class="key white-key"
+        data-note="C5"
+        data-code="KeyQ"
+        alternative-data-code="Comma"
+      >
         <span class="note-name">C5</span>
         <span class="key-label">Q</span>
       </div>
@@ -118,7 +135,12 @@
         <span class="note-name">C#5</span>
         <span class="key-label">2</span>
       </div>
-      <div class="key white-key" data-note="D5" data-code="KeyW" alternative-data-code="Period">
+      <div
+        class="key white-key"
+        data-note="D5"
+        data-code="KeyW"
+        alternative-data-code="Period"
+      >
         <span class="note-name">D5</span>
         <span class="key-label">W</span>
       </div>
@@ -131,7 +153,12 @@
         <span class="note-name">D#5</span>
         <span class="key-label">3</span>
       </div>
-      <div class="key white-key" data-note="E5" data-code="KeyE" alternative-data-code="Slash">
+      <div
+        class="key white-key"
+        data-note="E5"
+        data-code="KeyE"
+        alternative-data-code="Slash"
+      >
         <span class="note-name">E5</span>
         <span class="key-label">E</span>
       </div>
