@@ -7,6 +7,8 @@
     <script src="./scripts/mouse.js" defer></script>
     <script src="./scripts/keyboard.js" defer></script>
     <script src="./scripts/hideletters.js" defer></script>
+    <script src="./scripts/volume.js" defer></script>
+
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -21,6 +23,9 @@
 
       .controls {
         margin-bottom: 35px;
+        display: flex;
+        gap: 60px;
+        align-items: center;
       }
 
       .hide-button {
@@ -36,6 +41,86 @@
 
       .hide-button:hover {
         background-color: #6e6e6e;
+      }
+
+      .sound-selector {
+        display: flex;
+        align-items: center;
+      }
+
+      .sound-selector label {
+        margin-right: 10px;
+        font-weight: bold;
+      }
+
+      .sound-selector select {
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        background-color: white;
+        font-size: 16px;
+        cursor: pointer;
+        outline: none;
+      }
+
+      .sound-selector select:focus {
+        border-color: #666;
+      }
+
+      /* Стилі для повзунка гучності */
+      .volume-control {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .volume-control label {
+        font-weight: bold;
+        white-space: nowrap;
+      }
+
+      .volume-slider {
+        -webkit-appearance: none;
+        width: 120px;
+        height: 8px;
+        border-radius: 5px;  
+        background: #ddd;
+        outline: none;
+      }
+
+      .volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%; 
+        background: #8f8f8f;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .volume-slider::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #8f8f8f;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        border: none;
+      }
+
+      .volume-slider::-webkit-slider-thumb:hover {
+        background: #6e6e6e;
+      }
+
+      .volume-slider::-moz-range-thumb:hover {
+        background: #6e6e6e;
+      }
+
+      .volume-value {
+        min-width: 40px;
+        text-align: center;
+        font-weight: bold;
       }
 
       .piano {
@@ -126,10 +211,23 @@
   <body>
     <div class="controls">
       <button id="toggleSymbols" class="hide-button">Сховати символи</button>
+    
+      <div class="volume-control">
+        <label for="volume">Гучність:</label>
+        <input type="range" id="volume" class="volume-slider" min="0" max="100" value="90">
+        <span id="volumeValue" class="volume-value">90%</span>
+      </div>
+      
+      <div class="sound-selector">
+        <select id="instrument" name="instrument">
+          <option value="piano">Grand Piano</option>
+          <option value="celesta">Celesta</option>
+        </select>
+      </div>
     </div>
     <div class="piano" id="piano">
       <!-- Клавіші C4 октави -->
-      <div class="key white-key" data-note="C4" data-key="Z">
+      <div class="key white-key" data-note="C4" data-code="KeyZ" data-key="Z">
         <span class="note-name">C4</span>
         <span class="key-label">Z</span>
       </div>
@@ -142,7 +240,7 @@
         <span class="note-name">C#4</span>
         <span class="key-label">S</span>
       </div>
-      <div class="key white-key" data-note="D4" data-key="X">
+      <div class="key white-key" data-note="D4" data-code="KeyX" data-key="X">
         <span class="note-name">D4</span>
         <span class="key-label">X</span>
       </div>
@@ -155,11 +253,11 @@
         <span class="note-name">D#4</span>
         <span class="key-label">D</span>
       </div>
-      <div class="key white-key" data-note="E4" data-key="C">
+      <div class="key white-key" data-note="E4" data-code="KeyC" data-key="C">
         <span class="note-name">E4</span>
         <span class="key-label">C</span>
       </div>
-      <div class="key white-key" data-note="F4" data-key="V">
+      <div class="key white-key" data-note="F4" data-code="KeyV" data-key="V">
         <span class="note-name">F4</span>
         <span class="key-label">V</span>
       </div>
@@ -172,7 +270,7 @@
         <span class="note-name">F#4</span>
         <span class="key-label">G</span>
       </div>
-      <div class="key white-key" data-note="G4" data-key="B">
+      <div class="key white-key" data-note="G4" data-code="KeyB" data-key="B">
         <span class="note-name">G4</span>
         <span class="key-label">B</span>
       </div>
@@ -185,7 +283,7 @@
         <span class="note-name">G#4</span>
         <span class="key-label">H</span>
       </div>
-      <div class="key white-key" data-note="A4" data-key="N">
+      <div class="key white-key" data-note="A4" data-code="KeyN" data-key="N">
         <span class="note-name">A4</span>
         <span class="key-label">N</span>
       </div>
@@ -198,13 +296,13 @@
         <span class="note-name">A#4</span>
         <span class="key-label">J</span>
       </div>
-      <div class="key white-key" data-note="B4" data-key="M">
+      <div class="key white-key" data-note="B4" data-code="KeyM">
         <span class="note-name">B4</span>
         <span class="key-label">M</span>
       </div>
 
       <!-- Клавіші C5 октави -->
-      <div class="key white-key" data-note="C5" data-key="Q" alternative-data-key=",">
+      <div class="key white-key" data-note="C5" data-code="KeyQ" alternative-data-code="Comma">
         <span class="note-name">C5</span>
         <span class="key-label">Q</span>
       </div>
@@ -217,7 +315,7 @@
         <span class="note-name">C#5</span>
         <span class="key-label">2</span>
       </div>
-      <div class="key white-key" data-note="D5" data-key="W" alternative-data-key=".">
+      <div class="key white-key" data-note="D5" data-code="KeyW" alternative-data-code="Period">
         <span class="note-name">D5</span>
         <span class="key-label">W</span>
       </div>
@@ -230,11 +328,11 @@
         <span class="note-name">D#5</span>
         <span class="key-label">3</span>
       </div>
-      <div class="key white-key" data-note="E5" data-key="E" alternative-data-key="/">
+      <div class="key white-key" data-note="E5" data-code="KeyE" alternative-data-code="Slash">
         <span class="note-name">E5</span>
         <span class="key-label">E</span>
       </div>
-      <div class="key white-key" data-note="F5" data-key="R">
+      <div class="key white-key" data-note="F5" data-code="KeyR">
         <span class="note-name">F5</span>
         <span class="key-label">R</span>
       </div>
@@ -247,7 +345,7 @@
         <span class="note-name">F#5</span>
         <span class="key-label">5</span>
       </div>
-      <div class="key white-key" data-note="G5" data-key="T">
+      <div class="key white-key" data-note="G5" data-code="KeyT">
         <span class="note-name">G5</span>
         <span class="key-label">T</span>
       </div>
@@ -260,7 +358,7 @@
         <span class="note-name">G#5</span>
         <span class="key-label">6</span>
       </div>
-      <div class="key white-key" data-note="A5" data-key="Y">
+      <div class="key white-key" data-note="A5" data-code="KeyY">
         <span class="note-name">A5</span>
         <span class="key-label">Y</span>
       </div>
@@ -273,13 +371,13 @@
         <span class="note-name">A#5</span>
         <span class="key-label">7</span>
       </div>
-      <div class="key white-key" data-note="B5" data-key="U">
+      <div class="key white-key" data-note="B5" data-code="KeyU">
         <span class="note-name">B5</span>
         <span class="key-label">U</span>
       </div>
 
       <!-- Клавіші C6 октави до G6 -->
-      <div class="key white-key" data-note="C6" data-key="I">
+      <div class="key white-key" data-note="C6" data-code="KeyI">
         <span class="note-name">C6</span>
         <span class="key-label">I</span>
       </div>
@@ -292,7 +390,7 @@
         <span class="note-name">C#6</span>
         <span class="key-label">9</span>
       </div>
-      <div class="key white-key" data-note="D6" data-key="O">
+      <div class="key white-key" data-note="D6" data-code="KeyO">
         <span class="note-name">D6</span>
         <span class="key-label">O</span>
       </div>
@@ -305,11 +403,11 @@
         <span class="note-name">D#6</span>
         <span class="key-label">0</span>
       </div>
-      <div class="key white-key" data-note="E6" data-key="P">
+      <div class="key white-key" data-note="E6" data-code="KeyP">
         <span class="note-name">E6</span>
         <span class="key-label">P</span>
       </div>
-      <div class="key white-key" data-note="F6" data-key="[">
+      <div class="key white-key" data-note="F6" data-code="BracketLeft">
         <span class="note-name">F6</span>
         <span class="key-label">[</span>
       </div>
@@ -322,7 +420,7 @@
         <span class="note-name">F#6</span>
         <span class="key-label">=</span>
       </div>
-      <div class="key white-key" data-note="G6" data-key="]">
+      <div class="key white-key" data-note="G6" data-code="BracketRight">
         <span class="note-name">G6</span>
         <span class="key-label">]</span>
       </div>

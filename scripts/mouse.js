@@ -13,19 +13,37 @@ keys.forEach((key) => {
       currentNoteSound.currentTime = 0;
     }
 
-    noteSound = new Audio(`./notes/${note}.mp3`);
+    var instrumentSelector = document.getElementById("instrument");
+    var selectedInstrument = instrumentSelector.value;
+
+    let noteSoundChosen;
+    if (selectedInstrument === "piano") {
+      noteSoundChosen = `./notes/${note}.mp3`;
+    }
+    if (selectedInstrument === "celesta") {
+      noteSoundChosen = `./notes celesta/${note}.wav`;
+    }
+
+    noteSound = new Audio(noteSoundChosen);
+    if (selectedInstrument === "piano") {
+      noteSound.volume = volumeSlider.value / 100; //цю властивість в ChatGPT дізнався
+    }
+    if (selectedInstrument === "celesta") {
+      noteSound.volume = volumeSlider.value / 100;
+    }
+
     noteSound.play();
 
-    currentNoteSound = noteSound; 
+    currentNoteSound = noteSound;
 
-    key.classList.add('active');
+    key.classList.add("active");
     console.log("mouse touch");
   });
 
   key.addEventListener("mouseup", () => {
     if (noteSound) {
       // noteSound.pause();
-      key.classList.remove('active');
+      key.classList.remove("active");
 
       console.log("mouse up");
     }
@@ -34,7 +52,7 @@ keys.forEach((key) => {
   key.addEventListener("mouseleave", () => {
     if (noteSound) {
       // noteSound.pause();
-      key.classList.remove('active');
+      key.classList.remove("active");
 
       console.log("mouse leave");
     }
