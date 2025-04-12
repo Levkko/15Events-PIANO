@@ -5,21 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Piano</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="./scripts/mark.js" defer></script>
     <script src="./scripts/fade-out.js" defer></script>
     <script src="./scripts/mouse.js" defer></script>
-    <script src="./scripts/keyboard.js" defer></script>
     <script src="./scripts/hideletters.js" defer></script>
     <script src="./scripts/volume.js" defer></script>
     <script src="./scripts/theme.js" defer></script>
+    <script src="./scripts/melody-player.js" defer></script>
   </head>
   <body>
-    <div class="theme-toggle-container">
-      <button id="themeToggle" class="theme-toggle">Тема</button>
+    <div class="controls3">
+      <button id="Play" class="gimn-button">Зіграти пісню</button>
+    </div>
+
+    <div class="controls2">
+      <button id="toggleMark" class="mark-button">Відмітити</button>
+      <button id="playButton" class="play-button">Грати</button>
+      <button id="clearButton" class="clear-button">Очистити</button>
     </div>
 
     <div class="controls">
       <button id="toggleSymbols" class="hide-button">Сховати символи</button>
-
       <div class="volume-control">
         <label for="volume">Гучність:</label>
         <input
@@ -32,14 +38,17 @@
         />
         <span id="volumeValue" class="volume-value">90%</span>
       </div>
-
       <div class="sound-selector">
         <select id="instrument" name="instrument">
           <option value="piano">Grand Piano</option>
           <option value="celesta">Celesta</option>
         </select>
       </div>
+      <div class="theme-toggle-container">
+        <button id="themeToggle" class="theme-toggle">Тема</button>
+      </div>
     </div>
+
     <div class="piano" id="piano">
       <!-- Клавіші C4 октави -->
       <div class="key white-key" data-note="C4" data-code="KeyZ" data-key="Z">
@@ -50,7 +59,7 @@
         class="key black-key"
         style="left: 28px"
         data-note="C%234"
-        data-key="S"
+        data-code="KeyS"
       >
         <span class="note-name">C#4</span>
         <span class="key-label">S</span>
@@ -63,7 +72,7 @@
         class="key black-key"
         style="left: 68px"
         data-note="D%234"
-        data-key="D"
+        data-code="KeyD"
       >
         <span class="note-name">D#4</span>
         <span class="key-label">D</span>
@@ -80,7 +89,7 @@
         class="key black-key"
         style="left: 148px"
         data-note="F%234"
-        data-key="G"
+        data-code="KeyG"
       >
         <span class="note-name">F#4</span>
         <span class="key-label">G</span>
@@ -93,7 +102,7 @@
         class="key black-key"
         style="left: 188px"
         data-note="G%234"
-        data-key="H"
+        data-code="KeyH"
       >
         <span class="note-name">G#4</span>
         <span class="key-label">H</span>
@@ -106,7 +115,7 @@
         class="key black-key"
         style="left: 228px"
         data-note="A%234"
-        data-key="J"
+        data-code="KeyJ"
       >
         <span class="note-name">A#4</span>
         <span class="key-label">J</span>
@@ -130,7 +139,8 @@
         class="key black-key"
         style="left: 308px"
         data-note="C%235"
-        data-key="2"
+        data-code="Digit2"
+        alternative-data-code="KeyL"
       >
         <span class="note-name">C#5</span>
         <span class="key-label">2</span>
@@ -148,7 +158,8 @@
         class="key black-key"
         style="left: 348px"
         data-note="D%235"
-        data-key="3"
+        data-code="Digit3"
+        alternative-data-code="Semicolon"
       >
         <span class="note-name">D#5</span>
         <span class="key-label">3</span>
@@ -170,7 +181,7 @@
         class="key black-key"
         style="left: 428px"
         data-note="F%235"
-        data-key="5"
+        data-code="Digit5"
       >
         <span class="note-name">F#5</span>
         <span class="key-label">5</span>
@@ -183,7 +194,7 @@
         class="key black-key"
         style="left: 468px"
         data-note="G%235"
-        data-key="6"
+        data-code="Digit6"
       >
         <span class="note-name">G#5</span>
         <span class="key-label">6</span>
@@ -196,7 +207,7 @@
         class="key black-key"
         style="left: 508px"
         data-note="A%235"
-        data-key="7"
+        data-code="Digit7"
       >
         <span class="note-name">A#5</span>
         <span class="key-label">7</span>
@@ -215,7 +226,7 @@
         class="key black-key"
         style="left: 588px"
         data-note="C%236"
-        data-key="9"
+        data-code="Digit9"
       >
         <span class="note-name">C#6</span>
         <span class="key-label">9</span>
@@ -228,7 +239,7 @@
         class="key black-key"
         style="left: 628px"
         data-note="D%236"
-        data-key="0"
+        data-code="Digit0"
       >
         <span class="note-name">D#6</span>
         <span class="key-label">0</span>
@@ -245,7 +256,7 @@
         class="key black-key"
         style="left: 708px"
         data-note="F%236"
-        data-key="="
+        data-code="Equal"
       >
         <span class="note-name">F#6</span>
         <span class="key-label">=</span>
@@ -255,5 +266,6 @@
         <span class="key-label">]</span>
       </div>
     </div>
+
   </body>
 </html>

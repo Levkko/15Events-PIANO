@@ -9,5 +9,5 @@ function fadeOutAudio(audio) {
         audio.pause();
         clearInterval(fade);
       }
-    }, 30);
+    }, 20);
 }

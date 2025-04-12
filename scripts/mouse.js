@@ -29,7 +29,7 @@ keys.forEach((key) => {
     noteSound.play();
 
     key.classList.add("active");
-    console.log("mouse touch");
+    console.log(`mouse down, key: ${decodeURIComponent(note)}`);
   });
 
   key.addEventListener("mouseup", () => {
@@ -46,7 +46,7 @@ keys.forEach((key) => {
       // noteSound.pause();
       key.classList.remove("active");
       fadeOutAudio(noteSound);
-      console.log("mouse leave");
+      // console.log("mouse leave");
     }
   });
 });
