@@ -21,5 +21,56 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  preloadNotes();
-});
+    // Preload favicon.ico
+    const preloadFavicon = () => {
+      const link = document.createElement("link");
+      link.rel = "icon";
+      link.href = "./favicon.ico";
+      document.head.appendChild(link);
+  
+      // Force load favicon
+      const img = document.createElement("img");
+      img.src = "./favicon.ico";
+      img.style.display = "none";
+      document.body.appendChild(img);
+    };
+  
+    // Show loading screen
+    const showLoadingScreen = () => {
+      const loadingScreen = document.createElement("div");
+      loadingScreen.id = "loading-screen";
+      loadingScreen.style.position = "fixed";
+      loadingScreen.style.top = "0";
+      loadingScreen.style.left = "0";
+      loadingScreen.style.width = "100%";
+      loadingScreen.style.height = "100%";
+      loadingScreen.style.backgroundColor = "#fff"; // Білий фон
+      loadingScreen.style.color = "#000"; // Чорний текст
+      loadingScreen.style.display = "flex";
+      loadingScreen.style.justifyContent = "center";
+      loadingScreen.style.alignItems = "center";
+      loadingScreen.style.zIndex = "9999";
+      loadingScreen.style.transition = "opacity 0.5s ease"; // Плавний перехід
+      loadingScreen.innerText = "Loading...";
+      document.body.appendChild(loadingScreen);
+    };
+  
+    // Hide loading screen
+    const hideLoadingScreen = () => {
+      const loadingScreen = document.getElementById("loading-screen");
+      if (loadingScreen) {
+        loadingScreen.style.opacity = "0"; // Плавне зникнення
+        setTimeout(() => {
+          loadingScreen.remove();
+        }, 500); // Час для завершення анімації
+      }
+    };
+  
+    // Show loading screen and preload resources
+    showLoadingScreen();
+    setTimeout(() => {
+      preloadNotes();
+      preloadFavicon();
+      hideLoadingScreen();
+    }, 3000); // 3 seconds delay
+  });
