@@ -1,3 +1,5 @@
+//не працює ніфіга
+
 document.addEventListener("DOMContentLoaded", () => {
   const notes = [
     "A#4", "A#5", "A4", "A5", "B4", "B5", "C#4", "C#5", "C#6", "C4", "C5", "C6",
