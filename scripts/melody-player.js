@@ -8,7 +8,7 @@ function playNote(note, time) {
 
     let noteSoundChosen;
     if (selectedInstrument === "piano") {
-      noteSoundChosen = `./notes/${note}.mp3`;
+      noteSoundChosen = `./notes-piano/${note}.wav`;
     }
     if (selectedInstrument === "celesta") {
       noteSoundChosen = `./notes celesta/${note}.wav`;

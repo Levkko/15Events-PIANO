@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       notes.forEach((note) => {
         const encodedNote = note.replace("#", "%23");
         const notePath = instrument === "piano" 
-          ? `./notes/${encodedNote}.mp3` 
+          ? `./notes-piano/${encodedNote}.wav` 
           : `./notes celesta/${encodedNote}.wav`;
         const audio = new Audio(notePath);
         audio.volume = 0.0001;
